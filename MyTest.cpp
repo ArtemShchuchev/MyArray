@@ -1,11 +1,13 @@
 ﻿#include <iostream>
 
+/*
 template<class T, int _size>
 class Array {
 private:
     T arr[_size];
 
 public:
+    Array() = default;
     Array(std::initializer_list<T> init) {
         auto ptr = init.begin();
         for (int i(0); i < _size; ++i) {
@@ -13,6 +15,7 @@ public:
             ++ptr;
         }
     }
+
     T& operator[] (const int idx) {
         return arr[idx];
     }
@@ -24,8 +27,30 @@ public:
 
 const int SIZE_ARR(6);
 using myArr = Array<int, SIZE_ARR>;
+*/
 
-static void print(myArr arr) {
+template<class T>
+class Array
+{
+private:
+    T* arrPtr;
+    int _size;
+
+public:
+    Array() = default;
+    Array(T* ptr, int size) : arrPtr(ptr), _size(size) {}
+
+    T& operator[] (const int idx) {
+        return arrPtr[idx];
+    }
+    const T& operator[] (const int idx) const {
+        return arrPtr[idx];
+    }
+    int size() const { return _size; }
+};
+
+template<class T>
+static void print(Array<T> arr) {
     for (int i(0); i < arr.size(); ++i) {
         std::cout << arr[i] << " ";
     }
@@ -36,10 +61,11 @@ int main()
 {
     std::cout << "Hello World!\n";
 
-    myArr arr{ {1,2,3,4,5,6} };
+    int a[]{ 3,4,5,6,7,8 };
+    Array<int> arr{ a, sizeof(a)/sizeof(int)};
     print(arr);
     std::cout << "arrSize: " << arr.size() << "\n";
-    arr[0] = 3;
-    arr[2] = 25;
+
+    arr[3] = 25;
     print(arr);
 }
