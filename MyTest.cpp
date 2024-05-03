@@ -50,7 +50,7 @@ public:
 };
 
 template<class T>
-static void print(Array<T> arr) {
+static void print(const Array<T> arr) {
     for (int i(0); i < arr.size(); ++i) {
         std::cout << arr[i] << " ";
     }
