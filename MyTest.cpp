@@ -24,14 +24,15 @@ public:
     size_t size() const { return _size; }
     const T* begin() const { return &arr[0]; }
     const T* end() const { return (&arr[0] + _size); }
-    
-    friend std::ostream& operator<< (std::ostream& os, const Array& arr) {
-        for (const auto& data : arr) {
-            os << data << " ";
-        }
-        return os << std::endl;
-    }
 };
+
+template<class T, size_t size>
+std::ostream& operator<< (std::ostream& os, const Array<T, size>& arr) {
+    for (const auto& data : arr) {
+        os << data << " ";
+    }
+    return os << std::endl;
+}
 
 int main()
 {
